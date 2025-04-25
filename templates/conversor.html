@@ -1,0 +1,54 @@
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Temperatura</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Conversor de Temperatura</h1>
+
+        <form method="POST">
+            <div class="form-group">
+                <label for="celsius">Temperatura em Celsius (°C):</label>
+                <input type="number" id="celsius" name="celsius"
+                       step="0.1" required
+                       placeholder="Digite a temperatura em Celsius">
+            </div>
+
+            <button type="submit" class="btn-converter">Converter</button>
+        </form>
+
+        {% if erro %}
+            <div class="alert erro">
+                {{ erro }}
+            </div>
+        {% endif %}
+
+        {% if celsius is defined %}
+            <div class="resultado">
+                <h2>Resultado da Conversão</h2>
+                <div class="temperatura original">
+                    <span class="valor">{{ "%.1f"|format(celsius) }}</span>
+                    <span class="unidade">°C</span>
+                </div>
+
+                <div class="seta">↓</div>
+
+                <div class="conversoes">
+                    <div class="temperatura">
+                        <span class="valor">{{ "%.1f"|format(fahrenheit) }}</span>
+                        <span class="unidade">°F</span>
+                    </div>
+
+                    <div class="temperatura">
+                        <span class="valor">{{ "%.1f"|format(kelvin) }}</span>
+                        <span class="unidade">K</span>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
